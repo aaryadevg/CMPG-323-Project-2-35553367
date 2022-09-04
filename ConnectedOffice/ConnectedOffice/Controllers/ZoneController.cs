@@ -33,14 +33,25 @@ namespace ConnectedOffice.Controllers
 			{
 				return NotFound();
 			}
-			var device = await _context.Zones.FindAsync(id);
+			var zone = await _context.Zones.FindAsync(id);
 
-			if (device == null)
+			if (zone == null)
 			{
 				return NotFound();
 			}
 
-			return device;
+			return zone;
+		}
+
+		[HttpGet("{id}/Devices")]
+		public async Task<ActionResult<IEnumerable<Device>>> GetDevicesInZone(Guid id)
+		{
+			if (_context.Devices == null)
+			{
+				return NotFound();
+			}
+
+			return await _context.Devices.Where(device => device.ZoneId == id).ToListAsync();
 		}
 
 		[HttpPut("{id}")]
@@ -71,6 +82,7 @@ namespace ConnectedOffice.Controllers
 
 			return NoContent();
 		}
+
 
 		[HttpPost]
 		public async Task<ActionResult<Zone>> PostZone(Zone zone)
@@ -117,6 +129,8 @@ namespace ConnectedOffice.Controllers
 
 			return NoContent();
 		}
+
+
 
 		private bool ZoneExists(Guid id)
 		{

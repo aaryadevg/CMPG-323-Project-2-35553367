@@ -49,6 +49,35 @@ namespace ConnectedOffice.Controllers
             return category;
         }
 
+		// GET: api/Categories/5/Devices
+		[HttpGet("{id}/Devices")]
+		public async Task<ActionResult<IEnumerable<Device>>> GetDevicesBelongingToCategory(Guid id)
+		{
+			if (_context.Devices == null)
+			{
+                return NotFound();
+			}
+
+            return await _context.Devices.Where(device => device.CategoryId == id).ToListAsync();
+		}
+
+        // TODO: Ask lecturer I don't know what this query is supposed to do
+        // According to my interpretation this means the number of unique zones devices from this category are found in
+		[HttpGet("{id}/ZoneCount")]
+        public async Task<ActionResult<Int64>> GetAssociatedZoneCount(Guid id)
+		{
+            if (_context.Devices == null)
+            {
+                return NotFound();
+            }
+
+            return await _context.Devices
+                        .Where(device => device.CategoryId == id)
+                        .Select(device => device.ZoneId)
+                        .Distinct()
+                        .CountAsync();
+        }
+
         // PUT: api/Categories/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
