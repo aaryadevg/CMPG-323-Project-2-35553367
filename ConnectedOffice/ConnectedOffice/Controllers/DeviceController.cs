@@ -1,4 +1,6 @@
-﻿using ConnectedOffice.Models;
+﻿using ConnectedOffice.Auth;
+using ConnectedOffice.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -7,6 +9,7 @@ namespace ConnectedOffice.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
+	[Authorize]
 	public class DeviceController : ControllerBase
 	{
 		private readonly masterContext _context;
@@ -100,6 +103,7 @@ namespace ConnectedOffice.Controllers
 		}
 
 		[HttpDelete("{id}")]
+		[Authorize(Roles = Roles.ADMIN)]
 		public async Task<IActionResult> DeleteDevice(Guid id)
 		{
 			if (_context.Devices == null)

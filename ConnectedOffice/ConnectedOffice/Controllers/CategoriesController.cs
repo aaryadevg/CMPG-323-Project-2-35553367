@@ -6,11 +6,14 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ConnectedOffice.Models;
+using Microsoft.AspNetCore.Authorization;
+using ConnectedOffice.Auth;
 
 namespace ConnectedOffice.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CategoriesController : ControllerBase
     {
         private readonly masterContext _context;
@@ -24,10 +27,10 @@ namespace ConnectedOffice.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
         {
-          if (_context.Categories == null)
-          {
-              return NotFound();
-          }
+            if (_context.Categories == null)
+            {
+                return NotFound();
+            }
             return await _context.Categories.ToListAsync();
         }
 
@@ -35,10 +38,10 @@ namespace ConnectedOffice.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Category>> GetCategory(Guid id)
         {
-          if (_context.Categories == null)
-          {
-              return NotFound();
-          }
+            if (_context.Categories == null)
+            {
+                return NotFound();
+            }
             var category = await _context.Categories.FindAsync(id);
 
             if (category == null)
@@ -49,23 +52,23 @@ namespace ConnectedOffice.Controllers
             return category;
         }
 
-		// GET: api/Categories/5/Devices
-		[HttpGet("{id}/Devices")]
-		public async Task<ActionResult<IEnumerable<Device>>> GetDevicesBelongingToCategory(Guid id)
-		{
-			if (_context.Devices == null)
-			{
+        // GET: api/Categories/5/Devices
+        [HttpGet("{id}/Devices")]
+        public async Task<ActionResult<IEnumerable<Device>>> GetDevicesBelongingToCategory(Guid id)
+        {
+            if (_context.Devices == null)
+            {
                 return NotFound();
-			}
+            }
 
             return await _context.Devices.Where(device => device.CategoryId == id).ToListAsync();
-		}
+        }
 
         // TODO: Ask lecturer I don't know what this query is supposed to do
         // According to my interpretation this means the number of unique zones devices from this category are found in
-		[HttpGet("{id}/ZoneCount")]
+        [HttpGet("{id}/ZoneCount")]
         public async Task<ActionResult<Int64>> GetAssociatedZoneCount(Guid id)
-		{
+        {
             if (_context.Devices == null)
             {
                 return NotFound();
@@ -140,6 +143,7 @@ namespace ConnectedOffice.Controllers
 
         // DELETE: api/Categories/5
         [HttpDelete("{id}")]
+		[Authorize(Roles = Roles.ADMIN)]
         public async Task<IActionResult> DeleteCategory(Guid id)
         {
             if (_context.Categories == null)
