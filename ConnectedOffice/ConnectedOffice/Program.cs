@@ -92,6 +92,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ConnectedOfficeApi"));
 };
 
+app.UseSwagger();
+app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ConnectedOfficeApi"));
+
 app.UseAuthentication();
 
 app.UseHttpsRedirection();
