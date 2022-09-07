@@ -9,7 +9,9 @@ This is a smart device management API which is used to track the location of all
 - ASP .Net Core
 - Azure
 - REST framework
+- Entity framework
+- Identity framework
 
 # How to use
 
-In order to use this API administrators can make use of HTTP clients to send requests to the API
+In order to use this API administrators can make use of the swagger fronted end provided to make requests to the API by clicking the (API Front end)
