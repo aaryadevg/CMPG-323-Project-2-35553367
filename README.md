@@ -96,4 +96,6 @@ Sandrino Di Mattia. 2020. JWT Bearer Authentication and Authorization for ASP.NE
 
 Vincenzo Chianese. 2019. Security in your OpenAPI Specification | HackerNoon. Hackernoon. https://hackernoon.com/security-in-your-openapi-specification-94d081603950 Date of access: 07 Sep. 2022.
 
-Other than these resources I would also like to mention a special thanks to all my friends in CMPG 323 who really helped me out extensively through the project, and the lecturers for the guidance documents (How the fuck do I reference that?)
+Other than these resources I would also like to mention a special thanks to all my friends in CMPG 323 who really helped me out extensively through the project, and the lecturers for the guidance documents.
+
+Their support was appriciated
