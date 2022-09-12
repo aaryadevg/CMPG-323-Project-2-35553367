@@ -86,6 +86,26 @@ Please be aware that by default the JWT token will expire in **3 hours**, should
 
 Also note that reloading the page will also reset the authentication and you will have to login again
 
+# API End points (Swagger)
+
+## Categories
+
+<img src="Docs/categories_endpoints.png" />
+
+## Device
+
+<img src="Docs/device_endpoints.png" />
+
+## Zone
+
+<img src="Docs/zone_endpoints.png" />
+
+# Azure API management
+
+<img src="Docs/azure1.png" />
+
+<img src="Docs/azure2.png" />
+
 # References used during devlopment
 
 cephalin. 2022. Quickstart: Deploy an ASP.NET web app - Azure App Service. MSDN. https://docs.microsoft.com/en-us/azure/app-service/quickstart-dotnetcore Date of access: 07 Sep. 2022.
